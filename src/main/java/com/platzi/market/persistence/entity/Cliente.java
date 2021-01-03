@@ -5,10 +5,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "clientes")
-public class Clientes {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCliente;
+    @Column(name = "id_cliente")
+    private String idCliente;
 
     private String nombre;
 
@@ -21,14 +22,22 @@ public class Clientes {
     private String email;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Compras> compra;
+    private List<Compra> compra;
 
-    public Integer getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public List<Compra> getCompra() {
+        return compra;
+    }
+
+    public void setCompra(List<Compra> compra) {
+        this.compra = compra;
     }
 
     public String getNombre() {

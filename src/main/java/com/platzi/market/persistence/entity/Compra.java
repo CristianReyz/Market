@@ -6,15 +6,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "compras")
-public class Compras {
+public class Compra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_compra")
     private Integer idCompra;
 
-    private Integer idCliente;
+    @Column(name = "id_cliente")
+    private String idCliente;
 
     private LocalDateTime fecha;
 
+    @Column(name = "medio_pago")
     private String medioPago;
 
     private String comentario;
@@ -22,10 +25,10 @@ public class Compras {
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "idCliente",insertable = false,updatable = false)
-    private Clientes cliente;
+    @JoinColumn(name = "id_cliente",insertable = false,updatable = false)
+    private Cliente cliente;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL})
     private List<ComprasProducto> productos;
 
 
@@ -38,11 +41,11 @@ public class Compras {
         this.idCompra = idCompra;
     }
 
-    public Integer getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -76,5 +79,21 @@ public class Compras {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ComprasProducto> productos) {
+        this.productos = productos;
     }
 }

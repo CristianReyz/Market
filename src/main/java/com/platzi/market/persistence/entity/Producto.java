@@ -7,24 +7,28 @@ import javax.persistence.*;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //primary key
-            //@Column(name = "idProducto") solo si el nombre de la bd difiere del nombre de la variable
+    @Column(name = "id_producto") //solo si el nombre de la bd difiere del nombre de la variable
     private Integer idProducto;
 
 
     private String nombre;
 
+    @Column(name="id_categoria")
     private Integer idCategoria;
 
+    @Column(name = "codigo_barras")
     private String codigoBarras;
 
+    @Column(name = "precio_venta")
     private Double precioVenta;
 
+    @Column(name = "cantidad_stock")
     private Integer cantidadStock;
 
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "idCategoria", insertable = false, updatable = false)
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
     private Categoria categoria;
 
     public Integer getIdProducto() {
@@ -82,4 +86,14 @@ public class Producto {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+
 }
